@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery.mask")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

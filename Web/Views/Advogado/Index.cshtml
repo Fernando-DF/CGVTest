@@ -1,0 +1,47 @@
+﻿@using Web.ViewModels;
+@model List<AdvogadoViewModel>
+
+@{
+    ViewBag.Title = "Lista de Advogados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Advogados</h2>
+
+<p>
+    @Html.ActionLink("Criar Novo Advogado", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Senioridade</th>
+            <th>Endereço</th>
+            <th>CEP </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var advogado in Model)
+        {
+            <tr>
+                <td>@advogado.Nome</td>
+                <td>@advogado.Senioridade.ToString()</td>
+                <td>@advogado.Endereco.Logradouro,
+                @advogado.Endereco.Numero - @advogado.Endereco.Bairro - @advogado.Endereco.Complemento</td>
+                <td id="Cep"> @advogado.Endereco.Cep </td>
+                <td>
+
+                    @Html.ActionLink("Editar", "Edit", new { id = advogado.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = advogado.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="~/Scripts/app/Endereco/_MascararEndereco.js"></script>
+}

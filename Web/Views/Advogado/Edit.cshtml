@@ -1,0 +1,78 @@
+﻿@using Web.ViewModels;
+@model AdvogadoViewModel
+
+@{
+    ViewBag.Title = "Editar Advogado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar Advogado</h2>
+
+@using (Html.BeginForm("Edit", "Advogado", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Endereco.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome)
+        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Nome)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Senioridade)
+        @Html.EnumDropDownListFor(model => model.Senioridade, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Senioridade)
+    </div>
+
+    <h3>Endereço</h3>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Endereco.Logradouro)
+        @Html.TextBoxFor(model => model.Endereco.Logradouro, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Endereco.Logradouro)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Endereco.Bairro)
+        @Html.TextBoxFor(model => model.Endereco.Bairro, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Endereco.Bairro)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Endereco.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Endereco.Estado, Model.Estados, "-- Selecione --", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Endereco.Estado, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Endereco.Cep)
+        @Html.TextBoxFor(model => model.Endereco.Cep, new { @class = "form-control", @id = "CEP" })
+        @Html.ValidationMessageFor(model => model.Endereco.Cep)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Endereco.Numero)
+        @Html.TextBoxFor(model => model.Endereco.Numero, new { @class = "form-control", @id = "Numero" })
+        @Html.ValidationMessageFor(model => model.Endereco.Numero)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Endereco.Complemento)
+        @Html.TextBoxFor(model => model.Endereco.Complemento, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Endereco.Complemento)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="~/Scripts/app/Endereco/_MascararEndereco.js"></script>
+    <script src="~/Scripts/app/Endereco/_RestringirCamposEndereco.js"></script>
+    <script src="~/Scripts/app/Endereco/_ValidarEndereco.js"></script>
+    <script src="~/Scripts/app/Advogado/_ValidarAdvogado.js"></script>
+}
